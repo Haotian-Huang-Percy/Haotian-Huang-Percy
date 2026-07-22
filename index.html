@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percy | Personal Profile</title>
+
+<style>
+:root{
+    --bg:#f7f8fc;
+    --primary:#13294B;
+    --secondary:#1F4E9A;
+    --accent:#D4AF37;
+    --card:#ffffff;
+    --text:#2f3440;
+    --light:#eef2fb;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+}
+
+header{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:white;
+    padding:70px 8%;
+}
+
+.hero{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+}
+
+.hero-text{
+    flex:1;
+    min-width:280px;
+}
+
+.hero-text h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.hero-text h2{
+    font-size:1.35rem;
+    color:#f6d87a;
+    font-weight:500;
+    margin-bottom:25px;
+}
+
+.hero-text p{
+    max-width:700px;
+    opacity:.95;
+}
+
+.photo-container{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    overflow:hidden;
+    border:5px solid var(--accent);
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:var(--shadow);
+}
+
+.photo-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.photo-placeholder{
+    color:#777;
+    text-align:center;
+    padding:20px;
+    font-weight:600;
+}
+
+nav{
+    background:white;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+nav ul{
+    display:flex;
+    justify-content:center;
+    list-style:none;
+    flex-wrap:wrap;
+}
+
+nav li{
+    margin:0 15px;
+}
+
+nav a{
+    display:block;
+    padding:18px 0;
+    color:var(--primary);
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--accent);
+}
+
+section{
+    padding:70px 8%;
+}
+
+.section-title{
+    color:var(--primary);
+    font-size:2rem;
+    margin-bottom:25px;
+    position:relative;
+}
+
+.section-title::after{
+    content:"";
+    display:block;
+    width:70px;
+    height:4px;
+    background:var(--accent);
+    margin-top:10px;
+    border-radius:10px;
+}
+
+.card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:30px;
+    box-shadow:var(--shadow);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.skill-card{
+    background:white;
+    border-left:6px solid var(--accent);
+    padding:25px;
+    border-radius:16px;
+    box-shadow:var(--shadow);
+}
+
+.skill-card h3{
+    color:var(--primary);
+    margin-bottom:12px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+}
+
+.gallery-item{
+    background:white;
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    transition:.3s;
+}
+
+.gallery-item:hover{
+    transform:translateY(-6px);
+}
+
+.placeholder{
+    height:180px;
+    background:linear-gradient(135deg,#dbe5ff,#f3f6ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--secondary);
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+.gallery-item h4{
+    padding:18px;
+    color:var(--primary);
+}
+
+.contact{
+    text-align:center;
+}
+
+.contact a{
+    color:var(--secondary);
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    background:var(--primary);
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+.fade{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all .8s ease;
+}
+
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:700px){
+
+.hero{
+    text-align:center;
+}
+
+.hero-text h1{
+    font-size:2.4rem;
+}
+
+.photo-container{
+    margin:auto;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="hero">
+
+<div class="hero-text">
+<h1>Hi, I'm Percy!</h1>
+<h2>Rowing Club Captain</h2>
+
+<p>
+A passionate 9th grader at Qibao Dwight High School who enjoys exploring economics,
+sports management, rowing, mathematics, and digital content creation.
+I believe every challenge is an opportunity to learn, improve, and grow.
+</p>
+
+</div>
+
+<div class="photo-container">
+
+<img src="photo.jpg"
+alt="Profile Photo"
+onerror="this.style.display='none';document.getElementById('placeholder').style.display='flex';">
+
+<div id="placeholder" class="photo-placeholder" style="display:none;">
+📷<br><br>
+Add<br>photo.jpg
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<nav>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#activities">Activities</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section id="about" class="fade">
+
+<h2 class="section-title">About Me</h2>
+
+<div class="card">
+
+<p>
+I am a student at <strong>Qibao Dwight High School</strong> with a deep passion for economics,
+sports management, rowing, and creative media. I enjoy tackling challenges from multiple
+perspectives—whether that means solving complex mathematics problems, pushing my physical
+limits during training, or producing engaging videos through editing and storytelling.
+These experiences have taught me the importance of curiosity, discipline, and continuous
+self-improvement.
+</p>
+
+<br>
+
+<p>
+Looking ahead, I hope to combine my interests in sports and business by exploring how
+economics, management, and innovation can shape the future of athletics. At the same time,
+I plan to continue developing as a video creator, using digital media to share stories,
+document experiences, and inspire others through both competition and creativity.
+</p>
+
+</div>
+
+</section>
+
+<section id="skills" class="fade">
+
+<h2 class="section-title">Skills & Strengths</h2>
+
+<div class="grid">
+
+<div class="skill-card">
+<h3>Academic & Technical</h3>
+
+<p>
+• Strong mathematical foundation<br>
+• Analytical thinking and problem solving<br>
+• Video production and editing<br>
+• Social media content creation
+</p>
+
+</div>
+
+<div class="skill-card">
+
+<h3>Athletics & Personal</h3>
+
+<p>
+• High athletic endurance<br>
+• Leadership as Rowing Club Captain<br>
+• Strong teamwork and communication<br>
+• Competitive mindset and resilience
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="activities" class="fade">
+
+<h2 class="section-title">Background & Activities</h2>
+
+<div class="card">
+
+<p>
+Rowing has become one of the most meaningful parts of my life. Through years of training,
+I have learned that success is built on consistency, teamwork, and determination.
+I have competed in prestigious events such as the <strong>Head of the Charles Regatta (HOCR)</strong>
+and achieved strong performances in rowing competitions in Hong Kong. Each race has helped
+me become a stronger athlete while teaching me valuable lessons about perseverance,
+discipline, and leadership.
+</p>
+
+<br>
+
+<p>
+Today, I continue to train with the goal of competing at an even higher level,
+including preparation for the upcoming <strong>Shanghai Municipal Games</strong>.
+Beyond racing, I enjoy documenting my journey through photography and video production,
+sharing both the excitement of competition and the stories behind the hard work.
+</p>
+
+</div>
+
+</section>
+
+<section id="gallery" class="fade">
+
+<h2 class="section-title">Gallery</h2>
+
+<div class="gallery">
+
+<div class="gallery-item">
+<div class="placeholder">Race Photos</div>
+<h4>Race Photos Coming Soon</h4>
+</div>
+
+<div class="gallery-item">
+<div class="placeholder">Video Projects</div>
+<h4>Video Projects Coming Soon</h4>
+</div>
+
+<div class="gallery-item">
+<div class="placeholder">Training</div>
+<h4>Training Highlights Coming Soon</h4>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact" class="fade">
+
+<h2 class="section-title">Contact</h2>
+
+<div class="card contact">
+
+<p>
+Feel free to reach out for collaboration, competitions,
+creative projects, or simply to say hello.
+</p>
+
+<br>
+
+<p style="font-size:1.2rem;">
+📧
+<a href="mailto:percy1002@foxmail.com">
+percy1002@foxmail.com
+</a>
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+© 2026 Percy • Personal Website
+</p>
+
+</footer>
+
+<script>
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{threshold:.15});
+
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+</script>
+
+</body>
+</html>
